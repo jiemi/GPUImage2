@@ -50,6 +50,7 @@ public class RenderView:UIView, ImageConsumer {
         destroyDisplayFramebuffer()
     }
     
+    
     func createDisplayFramebuffer() {
         var newDisplayFramebuffer:GLuint = 0
         glGenFramebuffers(1, &newDisplayFramebuffer)
@@ -61,7 +62,9 @@ public class RenderView:UIView, ImageConsumer {
         displayRenderbuffer = newDisplayRenderbuffer
         glBindRenderbuffer(GLenum(GL_RENDERBUFFER), displayRenderbuffer!)
 
-        sharedImageProcessingContext.context.renderbufferStorage(Int(GL_RENDERBUFFER), from:self.layer as! CAEAGLLayer)
+        runOnMainQueue {
+            sharedImageProcessingContext.context.renderbufferStorage(Int(GL_RENDERBUFFER), from:self.layer as! CAEAGLLayer)
+        }
 
         var backingWidth:GLint = 0
         var backingHeight:GLint = 0
