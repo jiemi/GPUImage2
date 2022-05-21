@@ -7,7 +7,7 @@ import UIKit
 var imageProcessingShareGroup:EAGLSharegroup? = nil
 
 public class OpenGLContext: SerialDispatch {
-    lazy var framebufferCache:FramebufferCache = {
+    public lazy var framebufferCache:FramebufferCache = {
         return FramebufferCache(context:self)
     }()
     var shaderCache:[String:ShaderProgram] = [:]
